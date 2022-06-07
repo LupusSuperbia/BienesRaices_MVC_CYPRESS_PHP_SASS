@@ -4,7 +4,8 @@
   "description": "Curso Desarrollo Web Completo",
   "main": "gulpfile.js",
   "scripts": {
-   "gulp" : "gulp"
+   "gulp" : "gulp",
+   "build" : "build" 
   },
   "author": "Agustin Samperi",
   "license": "ISC",
