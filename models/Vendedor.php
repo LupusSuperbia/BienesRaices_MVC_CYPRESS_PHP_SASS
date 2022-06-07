@@ -1,0 +1,41 @@
+<?php 
+
+namespace Model;
+
+class Vendedor extends ActiveRecord{
+    protected static $tabla = 'vendedores';
+    protected static $columnasDB = ['id', 'nombre', 'appelido', 'telefono'];
+
+    public $id;
+    public $nombre;
+    public $apellido;
+    public $telefono;
+
+    public function __construct($args = [])
+    {
+        $this->id = $args['id'] ?? null;
+        $this->nombre = $args['nombre'] ?? '';
+        $this->apellido = $args['apellido'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
+
+    }
+
+    public function validar()
+    {
+         // VALIDAR INPUTS
+    if (!$this->nombre) {
+        self::$errores[] = 'El nombre es obligatorio';
+    }
+    if (!$this->apellido) {
+        self::$errores[] = 'El apellido es obligatorio';
+    }
+    if (!$this->telefono) {
+        self::$errores[] = 'El telefono es obligatorio';
+    }
+    // ------------- ('/[0-9]{10}/') Esto es una expresion regular //
+    if(!preg_match('/[0-9]{10}/', $this->telefono)){
+        self::$errores[] = 'Formato No Valido';
+    }
+    return self::$errores;
+}
+}
